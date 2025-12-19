@@ -60,9 +60,14 @@ This guide provides instructions for setting up the LCD35B display on your Raspb
     ```
     *   **Note:** Running `./LCD35B-show-V2` requires `sudo` privileges because it needs to interact directly with the display hardware and system resources.
 
-5. 
+5. **Configure X11 for LCD Display**
+**Important:** This step modifies system display configuration and is specific to routing X11 output to a secondary framebuffer (e.g., `/dev/fb1`) for your LCD. Your graphical desktop may restart. Proceed with caution and ensure you understand the changes.
+
 ```bash
+# Backup current X11 configuration:
 sudo cp /usr/share/X11/xorg.conf.d/99-fbturbo.conf /usr/share/X11/xorg.conf.d/99-fbturbo.conf.bak
+# Apply new X11 configuration for `/dev/fb1` (LCD):
+# This configures Xorg to use `/dev/fb1` as the display output.
 sudo bash -c 'cat <<EOF > /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 Section "Device"
         Identifier      "Raspberry Pi LCD"
@@ -71,12 +76,13 @@ Section "Device"
         Option          "SwapbuffersWait" "true"
 EndSection
 EOF'
+# Verify configuration (optional):
 sudo cat /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-# 重啟顯示管理器
+# Restart the display manager (e.g., LightDM) to apply changes:
 sudo systemctl restart lightdm
+# Check display manager status (optional):
 sudo systemctl status lightdm
-
-# 檢查 X11 日誌
+# Review X11 logs for troubleshooting (if issues occur):
 sudo tail -20 /var/log/Xorg.0.log
 ```
 
