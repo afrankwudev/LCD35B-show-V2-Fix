@@ -60,6 +60,26 @@ This guide provides instructions for setting up the LCD35B display on your Raspb
     ```
     *   **Note:** Running `./LCD35B-show-V2` requires `sudo` privileges because it needs to interact directly with the display hardware and system resources.
 
+5. 
+```bash
+sudo cp /usr/share/X11/xorg.conf.d/99-fbturbo.conf /usr/share/X11/xorg.conf.d/99-fbturbo.conf.bak
+sudo bash -c 'cat <<EOF > /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+Section "Device"
+        Identifier      "Raspberry Pi LCD"
+        Driver          "fbdev"
+        Option          "fbdev" "/dev/fb1"
+        Option          "SwapbuffersWait" "true"
+EndSection
+EOF'
+sudo cat /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+# 重啟顯示管理器
+sudo systemctl restart lightdm
+sudo systemctl status lightdm
+
+# 檢查 X11 日誌
+sudo tail -20 /var/log/Xorg.0.log
+```
+
 **Troubleshooting:**
 *   If you encounter compilation errors, please check the error messages and ensure all dependencies are correctly installed.
 *   If the display does not respond, verify your hardware connections and ensure that your Raspberry Pi has booted correctly into the graphical interface.
