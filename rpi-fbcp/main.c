@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <sys/ioctl.h>
 #include <syslog.h>
 #include <fcntl.h>
 #include <linux/fb.h>
