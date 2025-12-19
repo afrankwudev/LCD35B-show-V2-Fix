@@ -53,48 +53,48 @@ fi
 
 if test "$1" = "0" -o "$2" = "0" -o "$#" = "0" ;then
 	sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35b  /usr/share/X11/xorg.conf.d/99-calibration.conf
-	sudo cp ./boot/config-35b-v2.txt /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt /boot/firmware/config.txt
 	if test "$j" = "retropie"; then
-	sudo cp ./boot/config-35b-v2.txt-retropie /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-retropie /boot/firmware/config.txt
 	fi
 	echo "LCD configure 0"
 elif test "$1" = "lite" -a "$#" = "1" ;then
 	sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35b  /usr/share/X11/xorg.conf.d/99-calibration.conf
-	sudo cp ./boot/config-35b-v2.txt /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt /boot/firmware/config.txt
 	echo "LCD configure 0"
 elif test "$1" = "90" -o "$2" = "90" ;then
 	if test "$1" = "lite" -o "$2" = "lite" -o "$j" = "kali"; then
-	sudo cp ./boot/config-35b-v2.txt-90-lite /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-90-lite /boot/firmware/config.txt
 	else
-	sudo cp ./boot/config-35b-v2.txt-90 /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-90 /boot/firmware/config.txt
 	fi
         sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35b-270  /usr/share/X11/xorg.conf.d/99-calibration.conf
 	echo "LCD configure 90"
 elif test "$1" = "180"  -o "$2" = "180" ;then
 	if test "$1" = "lite" -o "$2" = "lite" -o "$j" = "kali"; then
-	sudo cp ./boot/config-35b-v2.txt-180-lite /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-180-lite /boot/firmware/config.txt
 	else
-	sudo cp ./boot/config-35b-v2.txt-180 /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-180 /boot/firmware/config.txt
 	fi
 	echo "LCD configure 180"
         sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35b-180  /usr/share/X11/xorg.conf.d/99-calibration.conf
 elif test "$1" = "270" -o "$2" = "270"; then
 	if test "$1" = "lite" -o "$2" = "lite" -o "$j" = "kali"; then
-	sudo cp ./boot/config-35b-v2.txt-270-lite /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-270-lite /boot/firmware/config.txt
 	else
-	sudo cp ./boot/config-35b-v2.txt-270 /boot/config.txt
+	sudo cp ./boot/config-35b-v2.txt-270 /boot/firmware/config.txt
 	fi
         sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35b-90  /usr/share/X11/xorg.conf.d/99-calibration.conf
 	echo "LCD configure 270"
 fi
 
-sudo cp ./waveshare35b-v2-overlay.dtb /boot/overlays/waveshare35b-v2.dtbo
-sudo cp ./waveshare35b-v2-overlay.dtb /boot/overlays/
+sudo cp ./waveshare35b-v2-overlay.dtb /boot/firmware/overlays/waveshare35b-v2.dtbo
+sudo cp ./waveshare35b-v2-overlay.dtb /boot/firmware/overlays/
 #sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/
 if [ -b /dev/mmcblk0p7 ]; then
-sudo cp ./cmdline.txt-noobs /boot/cmdline.txt
+sudo cp ./cmdline.txt-noobs /boot/firmware/cmdline.txt
 else
-sudo cp ./cmdline.txt /boot/
+sudo cp ./cmdline.txt /boot/firmware/
 fi
 
 sudo cp ./inittab /etc/
